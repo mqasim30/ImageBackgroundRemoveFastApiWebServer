@@ -11,7 +11,10 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("uvicorn")
 
 app = FastAPI()
-
+@app.get("/")
+async def root():
+    return {"message": "Background Remover API is running"}
+    
 async def remove_background_async(image_data):
     logger.info("Starting background removal")
     result_image = await run_in_threadpool(remove, image_data)
